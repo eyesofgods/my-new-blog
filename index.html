@@ -92,6 +92,14 @@
             <a class="nav-link" href="/newblog/about/">关于</a>
           </li>
         
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/newblog/links/">友链</a>
+          </li>
+        
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
@@ -140,39 +148,59 @@
   <div class="row mx-auto index-card">
     
     
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/newblog/2020/03/03/python3-aes实现/" target="_self">
+          <img src="/newblog/img/python.jpg" srcset="/newblog/img/loading.gif" alt="python3 aes实现" class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/newblog/2020/02/19/hello-world/">
-        <p class="h4 index-header">Hello World</p>
+      <a href="/newblog/2020/03/03/python3-aes实现/">
+        <p class="h4 index-header">python3 aes实现</p>
       </a>
 
-      <a href="/newblog/2020/02/19/hello-world/">
+      <a href="/newblog/2020/03/03/python3-aes实现/">
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post$ hexo new &quot;My New Post&quot;
+          <div class="index-text mb-1">环境python-3.6.5
+pip install pycryptodome
+#Python36\Lib\site-packages\crypto =&gt;Python36\Lib\site-packages\Crypto  不更改导入包会报错
+AESECBfrom Crypto.Cipher import AES
+import base64
 
-More info: Writing
-Run server$ hexo server
-
-More info: Server
-Generate static files$ hexo generate
-
-More info: Generating
-Deploy to remote sites$ hexo deploy
-
-More info: Deployment
-</div>
+def add_to_16(par):
+    par = par.encode(&#39;gbk&#39;) #先将字符串类型数据转换成字节型数据
+    while len(par) % 16 != 0: #对字节型数据进行长度判断
+        par += b&#39;\x00&#39; #如果字节型数据长度不是16倍整数就进行 补充
+    return par
+def encrypt(text,key):
+    mode = AES.MODE_ECB
+    aes = AES.new(add_to_16(key), mode)
+    cipher = aes.encrypt(add_to_16(text))
+    re</div>
         </div>
       </a>
 
       <div class="index-btm">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-19&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-03&nbsp;&nbsp;
         
         
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/crypto">crypto</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/python">python</a>&nbsp;
+          
+            <a href="/tags/aes">aes</a>&nbsp;
+          
         
       </div>
     </div>

@@ -4,13 +4,27 @@
   
   
   <entry>
-    <title>Hello World</title>
-    <link href="/newblog/2020/02/19/hello-world/"/>
-    <url>/newblog/2020/02/19/hello-world/</url>
+    <title>python3 aes实现</title>
+    <link href="/newblog/2020/03/03/python3-aes%E5%AE%9E%E7%8E%B0/"/>
+    <url>/newblog/2020/03/03/python3-aes%E5%AE%9E%E7%8E%B0/</url>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;</code></pre><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>python-3.6.5</p><pre><code>pip install pycryptodome#Python36\Lib\site-packages\crypto =&gt;Python36\Lib\site-packages\Crypto  不更改导入包会报错</code></pre><h2 id="AES"><a href="#AES" class="headerlink" title="AES"></a>AES</h2><h3 id="ECB"><a href="#ECB" class="headerlink" title="ECB"></a>ECB</h3><pre><code class="python">from Crypto.Cipher import AESimport base64def add_to_16(par):    par = par.encode(&#39;gbk&#39;) #先将字符串类型数据转换成字节型数据    while len(par) % 16 != 0: #对字节型数据进行长度判断        par += b&#39;\x00&#39; #如果字节型数据长度不是16倍整数就进行 补充    return pardef encrypt(text,key):    mode = AES.MODE_ECB    aes = AES.new(add_to_16(key), mode)    cipher = aes.encrypt(add_to_16(text))    return base64.encodebytes(cipher).decode().strip()def decrypt(text,key):    mode = AES.MODE_ECB    text = base64.decodebytes(text.encode(&#39;gbk&#39;))    aes = AES.new(add_to_16(key), mode)    plaintext = aes.decrypt(text)    return plaintext.decode(&#39;gbk&#39;).strip(&#39;\0&#39;)if __name__ == &#39;__main__&#39;:    e = encrypt(&quot;晨曦远&quot;,&quot;123456&quot;)    print(&quot;加密:&quot;, e)    d=decrypt(e,&quot;123456&quot;)    print(&quot;解密:&quot;,d)</code></pre><p>去在线网站加解密试试<a href="http://tool.chacuo.net/cryptaes" target="_blank" rel="noopener">在线aes加密解密</a></p>]]></content>
     
     
+    <categories>
+      
+      <category>crypto</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>python</tag>
+      
+      <tag>aes</tag>
+      
+    </tags>
     
   </entry>
   
