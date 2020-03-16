@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>docker+Lychee搭建自己的图床</title>
+    <link href="/newblog/2020/03/16/docker-Lychee%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9B%BE%E5%BA%8A/"/>
+    <url>/newblog/2020/03/16/docker-Lychee%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9B%BE%E5%BA%8A/</url>
+    
+    <content type="html"><![CDATA[<p>之前的图床过期，图片直接没了，所以现在在自己服务器上搭一个小型图床好了。用的是开源项目Lychee。</p><h2 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h2><p>docker安装就不记录了，之前博客写过。</p><h2 id="Lychee"><a href="#Lychee" class="headerlink" title="Lychee"></a>Lychee</h2><p>拉取镜像</p><pre><code>docker image pull kdelfour/lychee-docker</code></pre><p>运行镜像</p><pre><code>docker run -it -d -p 4001:80 kdelfour/lychee-docker</code></pre><p>然后访问<code>服务器ip:4001</code>,进行简单的设置，就可以上传图片了。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>其他</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>docker</tag>
+      
+      <tag>图床</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>记一次ctf校赛simple_xss出题</title>
     <link href="/newblog/2020/03/15/%E8%AE%B0%E4%B8%80%E6%AC%A1ctf%E6%A0%A1%E8%B5%9Bsimple-xss%E5%87%BA%E9%A2%98/"/>
     <url>/newblog/2020/03/15/%E8%AE%B0%E4%B8%80%E6%AC%A1ctf%E6%A0%A1%E8%B5%9Bsimple-xss%E5%87%BA%E9%A2%98/</url>
