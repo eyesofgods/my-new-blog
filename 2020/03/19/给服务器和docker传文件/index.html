@@ -15,7 +15,7 @@
   <meta name="description" content>
   <meta name="author" content="chenxiyuan">
   <meta name="keywords" content>
-  <title>标签 - web ~ 晨曦远的博客</title>
+  <title>给服务器和docker传文件 ~ 晨曦远的博客</title>
 
   <link rel="stylesheet" href="/newblog/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/newblog/lib/bootstrap/css/bootstrap.min.css">
@@ -36,7 +36,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -111,8 +111,8 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
-         style="background: url('/newblog/img/biaoqian.jpg')no-repeat center center;
+    <div class="view intro-2" id="background" false
+         style="background: url('/newblog/img/wenzhang.jpg')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -121,6 +121,41 @@
               
             </span>
 
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期四, 三月 19日 2020, 11:27 上午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    304 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      1 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
             
           </div>
 
@@ -132,48 +167,109 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-<!--  <p class="h4">共计 3 篇文章</p>-->
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/newblog/2020/03/19/ubuntu-java-tomcat-mysql/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">ubuntu+java+tomcat</span>
-      <span style="float: right;">03-19</span>
-    </a>
-  
-    
-    <a href="/newblog/2020/03/16/SUCTF2019-EasySQL记录/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">SUCTF2019 EasySQL记录</span>
-      <span style="float: right;">03-16</span>
-    </a>
-  
-    
-    <a href="/newblog/2020/03/15/记一次ctf校赛simple-xss出题/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">记一次ctf校赛simple_xss出题</span>
-      <span style="float: right;">03-15</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h2 id="本机到服务器"><a href="#本机到服务器" class="headerlink" title="本机到服务器"></a>本机到服务器</h2><p>用xshell连服务器，可以用<code>scp</code>传。<br>今天发现了一个好用的命令<code>rz</code>,可以直接上传文件到当前文件夹。</p>
+<pre><code>rz [选项]
 
+选项说明：
 
-              </div>
-            </div>
+-+, --append:将文件内容追加到已存在的同名文件
+
+-a,--ascii:以文本方式传输
+
+-b, --binary:以二进制方式传输，推荐使用
+
+--delay-startup N:等待N秒
+
+-e, --escape:对所有控制字符转义，建议使用
+
+-E, --rename:已存在同名文件则重命名新上传的文件，以点和数字作为后缀
+
+-p, --protect:对ZMODEM协议有效，如果目标文件已存在则跳过 -
+
+q, --quiet:安静执行，不输出提示信息
+
+-v, --verbose:输出传输过程中的提示信息
+
+-y, --overwrite:存在同名文件则替换
+
+-X, --xmodem:使用XMODEM协议
+
+--ymodem:使用YMODEM协议
+
+-Z, --zmodem:使用ZMODEM协议
+
+--version：显示版本信息
+
+--h, --help：显示帮助信息
+
+</code></pre><p>下载到本地就用sz命令。</p>
+<h2 id="服务器到docker"><a href="#服务器到docker" class="headerlink" title="服务器到docker"></a>服务器到docker</h2><p>服务器到docker</p>
+<pre><code>docker cp 本机保存文件的全路径 container_id:docker容器内的文件全路径
+</code></pre><p>docker到服务器</p>
+<pre><code>docker cp container_id:docker容器内的文件全路径 本机保存文件的全路径
+</code></pre>
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/linux">linux</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/docker">docker</a>
+                
+                  <a class="hover-with-bg" href="/tags/linux">linux</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -252,6 +348,11 @@
 
 
 
+  
+    <script src="/newblog/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/newblog/js/post.js" ></script>
+
 
 
   <script src="/newblog/lib/smoothscroll/SmoothScroll.min.js" ></script>
@@ -292,7 +393,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "标签 - web&nbsp;",
+        "给服务器和docker传文件&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

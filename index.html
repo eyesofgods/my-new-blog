@@ -149,6 +149,207 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/newblog/2020/03/20/从零开始android开发-二/" target="_self">
+          <img src="http://120.26.91.51:4001/uploads/big/3a19148484a42e956020ec8d5df78289.jpg" srcset="/newblog/img/loading.gif" alt="从零开始android开发(二)" class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/newblog/2020/03/20/从零开始android开发-二/">
+        <p class="h4 index-header">从零开始android开发(二)</p>
+      </a>
+
+      <a href="/newblog/2020/03/20/从零开始android开发-二/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">今天要写一个启动页，并且跳转到主程序。
+@Override@Override表示重写。编译器可以验证@Override下面的方法名是否是你父类中所有的，如果没有则报错。
+activity跳转一个app启动时，首先是启动页，然后跳转到主程序。
+Intent intent = new Intent(FirstActivity.this,SecondActivity.class);
+startActivity(intent);
+传送参数putExtra发送
+intent.putExtra(&quot;name&quot;,&quot;chenxiyuan&quot;);
+intent.putExtra(&quot;age&quot;,20);
+接收
+String name = intent.getStringExtra(&quot;name&quot;);
+int age = intent.getIntExtra(&quot;age&quot;);
+Bundle发送
+Bundle bundle = new Bundle();
+bundle.putString(&quot;name&quot;</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-20&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91">安卓开发</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/android">android</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/newblog/2020/03/19/ubuntu-java-tomcat-mysql/" target="_self">
+          <img src="/newblog/img/default.png" srcset="/newblog/img/loading.gif" alt="ubuntu+java+tomcat" class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/newblog/2020/03/19/ubuntu-java-tomcat-mysql/">
+        <p class="h4 index-header">ubuntu+java+tomcat</p>
+      </a>
+
+      <a href="/newblog/2020/03/19/ubuntu-java-tomcat-mysql/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">java安装默认版本
+sudo apt install default-jdk
+Java 8
+sudo apt install openjdk-8-jdk
+which java
+root@356ca11f70aa:/usr/local# which java
+/usr/bin/java
+root@356ca11f70aa:/usr/local# ls /usr/bin/java
+/usr/bin/java
+root@356ca11f70aa:/usr/local# ls -l /usr/bin/java
+lrwxrwxrwx 1 root root 22 Mar 19 05:13 /usr/bin/java -&gt; /etc/alternatives/java
+root@356ca11f70aa:/usr/local# ls -l /etc/alternatives/java
+lrwxrwxrwx 1 root root 43 Mar 19 05:13 /etc/alternatives/java -&gt; /usr/lib/jvm/java-11-openjdk-amd64/b</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-19&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/linux">linux</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/linux">linux</a>&nbsp;
+          
+            <a href="/tags/web">web</a>&nbsp;
+          
+            <a href="/tags/tomcat">tomcat</a>&nbsp;
+          
+            <a href="/tags/java">java</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/newblog/2020/03/19/给服务器和docker传文件/" target="_self">
+          <img src="/newblog/img/default.png" srcset="/newblog/img/loading.gif" alt="给服务器和docker传文件" class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/newblog/2020/03/19/给服务器和docker传文件/">
+        <p class="h4 index-header">给服务器和docker传文件</p>
+      </a>
+
+      <a href="/newblog/2020/03/19/给服务器和docker传文件/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">本机到服务器用xshell连服务器，可以用scp传。今天发现了一个好用的命令rz,可以直接上传文件到当前文件夹。
+rz [选项]
+
+选项说明：
+
+-+, --append:将文件内容追加到已存在的同名文件
+
+-a,--ascii:以文本方式传输
+
+-b, --binary:以二进制方式传输，推荐使用
+
+--delay-startup N:等待N秒
+
+-e, --escape:对所有控制字符转义，建议使用
+
+-E, --rename:已存在同名文件则重命名新上传的文件，以点和数字作为后缀
+
+-p, --protect:对ZMODEM协议有效，如果目标文件已存在则跳过 -
+
+q, --quiet:安静执行，不输出提示信息
+
+-v, --verbose:输出传输过程中的提示信息
+
+-y, --overwrite:存在同名文件则替换
+
+-X, --xmodem:使用XMODEM协议
+
+--ymodem:使用YMODEM协议
+
+-Z, --zmodem:使用ZMODEM协议
+
+--version：显示版本信息
+
+--h, --help：显示帮助信息
+
+下载到本地就用sz命令。
+服务器到docke</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-19&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/linux">linux</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/docker">docker</a>&nbsp;
+          
+            <a href="/tags/linux">linux</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/newblog/2020/03/17/从零开始android开发-一/" target="_self">
           <img src="http://120.26.91.51:4001/uploads/big/3a19148484a42e956020ec8d5df78289.jpg" srcset="/newblog/img/loading.gif" alt="从零开始android开发(一)" class="index-img img-fluid rounded index-thumbnails">
         </a>
@@ -354,11 +555,11 @@ LEAVE</div>
         
           <i class="iconfont icon-tag"></i>
           
+            <a href="/tags/web">web</a>&nbsp;
+          
             <a href="/tags/sql">sql</a>&nbsp;
           
             <a href="/tags/%E6%B3%A8%E5%85%A5">注入</a>&nbsp;
-          
-            <a href="/tags/web">web</a>&nbsp;
           
         
       </div>

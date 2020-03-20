@@ -4,6 +4,89 @@
   
   
   <entry>
+    <title>从零开始android开发(二)</title>
+    <link href="/newblog/2020/03/20/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Bandroid%E5%BC%80%E5%8F%91-%E4%BA%8C/"/>
+    <url>/newblog/2020/03/20/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Bandroid%E5%BC%80%E5%8F%91-%E4%BA%8C/</url>
+    
+    <content type="html"><![CDATA[<p>今天要写一个启动页，并且跳转到主程序。</p><h2 id="Override"><a href="#Override" class="headerlink" title="@Override"></a>@Override</h2><p><code>@Override</code>表示重写。编译器可以验证<code>@Override</code>下面的方法名是否是你父类中所有的，如果没有则报错。</p><h2 id="activity跳转"><a href="#activity跳转" class="headerlink" title="activity跳转"></a>activity跳转</h2><p>一个app启动时，首先是启动页，然后跳转到主程序。</p><pre><code>Intent intent = new Intent(FirstActivity.this,SecondActivity.class);startActivity(intent);</code></pre><h3 id="传送参数"><a href="#传送参数" class="headerlink" title="传送参数"></a>传送参数</h3><h4 id="putExtra"><a href="#putExtra" class="headerlink" title="putExtra"></a>putExtra</h4><p>发送</p><pre><code>intent.putExtra(&quot;name&quot;,&quot;chenxiyuan&quot;);intent.putExtra(&quot;age&quot;,20);</code></pre><p>接收</p><pre><code>String name = intent.getStringExtra(&quot;name&quot;);int age = intent.getIntExtra(&quot;age&quot;);</code></pre><h4 id="Bundle"><a href="#Bundle" class="headerlink" title="Bundle"></a>Bundle</h4><p>发送</p><pre><code>Bundle bundle = new Bundle();bundle.putString(&quot;name&quot;,&quot;chenxiyuan&quot;);bundle.putInt(&quot;age&quot;,20);intent.putExtras(bundle);</code></pre><p>接收</p><pre><code>Bundle bundle = intent.getExtras();String name = bundle.getString(&quot;name&quot;);int age = bundle.getInt(&quot;age&quot;);</code></pre><h2 id="主activity"><a href="#主activity" class="headerlink" title="主activity"></a>主activity</h2><p>在相应的标签里加入如下</p><pre><code>    &lt;intent-filter&gt;                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;    &lt;/intent-filter&gt;</code></pre><p>小记录，如果你的程序闪退，有可能是你调用了那个xml，但是没在application里声明activity。。。</p><h2 id="webview不跳转到浏览器"><a href="#webview不跳转到浏览器" class="headerlink" title="webview不跳转到浏览器"></a>webview不跳转到浏览器</h2><p>在loadurl方法前加入如下,即可实现不跳转到默认浏览器，而是在页面内访问。</p><pre><code>myWebView.setWebViewClient(new WebViewClient());</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>安卓开发</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>android</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>ubuntu+java+tomcat</title>
+    <link href="/newblog/2020/03/19/ubuntu-java-tomcat-mysql/"/>
+    <url>/newblog/2020/03/19/ubuntu-java-tomcat-mysql/</url>
+    
+    <content type="html"><![CDATA[<h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><p>安装默认版本</p><pre><code>sudo apt install default-jdk</code></pre><p>Java 8</p><pre><code>sudo apt install openjdk-8-jdk</code></pre><p>which java</p><pre><code>root@356ca11f70aa:/usr/local# which java/usr/bin/javaroot@356ca11f70aa:/usr/local# ls /usr/bin/java/usr/bin/javaroot@356ca11f70aa:/usr/local# ls -l /usr/bin/javalrwxrwxrwx 1 root root 22 Mar 19 05:13 /usr/bin/java -&gt; /etc/alternatives/javaroot@356ca11f70aa:/usr/local# ls -l /etc/alternatives/javalrwxrwxrwx 1 root root 43 Mar 19 05:13 /etc/alternatives/java -&gt; /usr/lib/jvm/java-11-openjdk-amd64/bin/javaroot@356ca11f70aa:/usr/local# ls -l /usr/lib/jvm/java-11-openjdk-amd64/bin/java-rwxr-xr-x 1 root root 10304 Jan 15 15:14 /usr/lib/jvm/java-11-openjdk-amd64/bin/javaroot@356ca11f70aa:/usr/local# cd /usr/lib/jvm/java-11-openjdk-amd64root@356ca11f70aa:/usr/lib/jvm/java-11-openjdk-amd64# lsbin  conf  docs  include  jmods  legal  lib  man  release</code></pre><p>配置环境变量</p><pre><code>vim /etc/profile</code></pre><p>在最后面添加</p><pre><code>export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64export PATH=$PATH:$JAVA_HOME/binexport CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar</code></pre><p>然后更新</p><pre><code>source /etc/profileroot@356ca11f70aa:/usr/lib/jvm/java-11-openjdk-amd64# echo $JAVA_HOME     /usr/lib/jvm/java-11-openjdk-amd64</code></pre><p>或者输出版本号</p><pre><code>root@356ca11f70aa:/usr/lib/jvm/java-11-openjdk-amd64# java -versionopenjdk version &quot;11.0.6&quot; 2020-01-14OpenJDK Runtime Environment (build 11.0.6+10-post-Ubuntu-1ubuntu118.04.1)OpenJDK 64-Bit Server VM (build 11.0.6+10-post-Ubuntu-1ubuntu118.04.1, mixed mode, sharing)</code></pre><p>编个程序试试</p><pre><code>vim test.javapublic class test {        public static void main(String args[]) {                System.out.println(&quot;Hello world!&quot;);        }}</code></pre><p>编译执行</p><pre><code>root@356ca11f70aa:~# javac test.javaroot@356ca11f70aa:~# java testHello world!</code></pre><h2 id="tomcat"><a href="#tomcat" class="headerlink" title="tomcat"></a>tomcat</h2><p>Tomcat服务器是一个免费的开放源代码的Web应用服务器，属于轻量级应用服务器，在中小型系统和并发访问用户不是很多的场合下被普遍使用，是开发和调试JSP程序的首选。<br><a href="https://tomcat.apache.org/" target="_blank" rel="noopener">tomcat官网</a><br>我下载好传到docker里</p><pre><code>cp apache-tomcat-8.5.53.tar.gz /usr/local/</code></pre><p>解压</p><pre><code>tar -zxvf apache-tomcat-8.5.53.tar.gz</code></pre><p>赋权限</p><pre><code>chmod 755 -R apache-tomcat-8.5.53</code></pre><p>修改启动脚本，进入tomcat的bin目录下</p><pre><code>vi startup.sh</code></pre><p>在最后一句前加上如下</p><pre><code>#set java environmentexport JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64export JRE_HOME=${JAVA_HOME}/jreexport CLASSPATH=.:%{JAVA_HOME}/lib:%{JRE_HOME}/libexport PATH=${JAVA_HOME}/bin:$PATH#tomcatexport TOMCAT_HOME=/usr/local/apache-tomcat-8.5.53</code></pre><p>运行</p><pre><code>./startup.sh</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>linux</tag>
+      
+      <tag>web</tag>
+      
+      <tag>tomcat</tag>
+      
+      <tag>java</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>给服务器和docker传文件</title>
+    <link href="/newblog/2020/03/19/%E7%BB%99%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8Cdocker%E4%BC%A0%E6%96%87%E4%BB%B6/"/>
+    <url>/newblog/2020/03/19/%E7%BB%99%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%92%8Cdocker%E4%BC%A0%E6%96%87%E4%BB%B6/</url>
+    
+    <content type="html"><![CDATA[<h2 id="本机到服务器"><a href="#本机到服务器" class="headerlink" title="本机到服务器"></a>本机到服务器</h2><p>用xshell连服务器，可以用<code>scp</code>传。<br>今天发现了一个好用的命令<code>rz</code>,可以直接上传文件到当前文件夹。</p><pre><code>rz [选项]选项说明：-+, --append:将文件内容追加到已存在的同名文件-a,--ascii:以文本方式传输-b, --binary:以二进制方式传输，推荐使用--delay-startup N:等待N秒-e, --escape:对所有控制字符转义，建议使用-E, --rename:已存在同名文件则重命名新上传的文件，以点和数字作为后缀-p, --protect:对ZMODEM协议有效，如果目标文件已存在则跳过 -q, --quiet:安静执行，不输出提示信息-v, --verbose:输出传输过程中的提示信息-y, --overwrite:存在同名文件则替换-X, --xmodem:使用XMODEM协议--ymodem:使用YMODEM协议-Z, --zmodem:使用ZMODEM协议--version：显示版本信息--h, --help：显示帮助信息</code></pre><p>下载到本地就用sz命令。</p><h2 id="服务器到docker"><a href="#服务器到docker" class="headerlink" title="服务器到docker"></a>服务器到docker</h2><p>服务器到docker</p><pre><code>docker cp 本机保存文件的全路径 container_id:docker容器内的文件全路径</code></pre><p>docker到服务器</p><pre><code>docker cp container_id:docker容器内的文件全路径 本机保存文件的全路径</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>docker</tag>
+      
+      <tag>linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>从零开始android开发(一)</title>
     <link href="/newblog/2020/03/17/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Bandroid%E5%BC%80%E5%8F%91-%E4%B8%80/"/>
     <url>/newblog/2020/03/17/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Bandroid%E5%BC%80%E5%8F%91-%E4%B8%80/</url>
@@ -72,11 +155,11 @@
     
     <tags>
       
+      <tag>web</tag>
+      
       <tag>sql</tag>
       
       <tag>注入</tag>
-      
-      <tag>web</tag>
       
     </tags>
     

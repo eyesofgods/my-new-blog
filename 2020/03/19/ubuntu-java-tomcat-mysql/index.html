@@ -15,7 +15,7 @@
   <meta name="description" content>
   <meta name="author" content="chenxiyuan">
   <meta name="keywords" content>
-  <title>标签 - web ~ 晨曦远的博客</title>
+  <title>ubuntu+java+tomcat ~ 晨曦远的博客</title>
 
   <link rel="stylesheet" href="/newblog/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/newblog/lib/bootstrap/css/bootstrap.min.css">
@@ -36,7 +36,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -111,8 +111,8 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
-         style="background: url('/newblog/img/biaoqian.jpg')no-repeat center center;
+    <div class="view intro-2" id="background" false
+         style="background: url('/newblog/img/wenzhang.jpg')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -121,6 +121,41 @@
               
             </span>
 
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期四, 三月 19日 2020, 1:13 下午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    505 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      2 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
             
           </div>
 
@@ -132,48 +167,138 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-<!--  <p class="h4">共计 3 篇文章</p>-->
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/newblog/2020/03/19/ubuntu-java-tomcat-mysql/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">ubuntu+java+tomcat</span>
-      <span style="float: right;">03-19</span>
-    </a>
-  
-    
-    <a href="/newblog/2020/03/16/SUCTF2019-EasySQL记录/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">SUCTF2019 EasySQL记录</span>
-      <span style="float: right;">03-16</span>
-    </a>
-  
-    
-    <a href="/newblog/2020/03/15/记一次ctf校赛simple-xss出题/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">记一次ctf校赛simple_xss出题</span>
-      <span style="float: right;">03-15</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><p>安装默认版本</p>
+<pre><code>sudo apt install default-jdk
+</code></pre><p>Java 8</p>
+<pre><code>sudo apt install openjdk-8-jdk
+</code></pre><p>which java</p>
+<pre><code>root@356ca11f70aa:/usr/local# which java
+/usr/bin/java
+root@356ca11f70aa:/usr/local# ls /usr/bin/java
+/usr/bin/java
+root@356ca11f70aa:/usr/local# ls -l /usr/bin/java
+lrwxrwxrwx 1 root root 22 Mar 19 05:13 /usr/bin/java -&gt; /etc/alternatives/java
+root@356ca11f70aa:/usr/local# ls -l /etc/alternatives/java
+lrwxrwxrwx 1 root root 43 Mar 19 05:13 /etc/alternatives/java -&gt; /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+root@356ca11f70aa:/usr/local# ls -l /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+-rwxr-xr-x 1 root root 10304 Jan 15 15:14 /usr/lib/jvm/java-11-openjdk-amd64/bin/java
+root@356ca11f70aa:/usr/local# cd /usr/lib/jvm/java-11-openjdk-amd64
+root@356ca11f70aa:/usr/lib/jvm/java-11-openjdk-amd64# ls
+bin  conf  docs  include  jmods  legal  lib  man  release
+</code></pre><p>配置环境变量</p>
+<pre><code>vim /etc/profile
+</code></pre><p>在最后面添加</p>
+<pre><code>export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export PATH=$PATH:$JAVA_HOME/bin
+export CLASSPATH=.:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar
+</code></pre><p>然后更新</p>
+<pre><code>source /etc/profile
 
+root@356ca11f70aa:/usr/lib/jvm/java-11-openjdk-amd64# echo $JAVA_HOME     
+/usr/lib/jvm/java-11-openjdk-amd64
+</code></pre><p>或者输出版本号</p>
+<pre><code>root@356ca11f70aa:/usr/lib/jvm/java-11-openjdk-amd64# java -version
+openjdk version &quot;11.0.6&quot; 2020-01-14
+OpenJDK Runtime Environment (build 11.0.6+10-post-Ubuntu-1ubuntu118.04.1)
+OpenJDK 64-Bit Server VM (build 11.0.6+10-post-Ubuntu-1ubuntu118.04.1, mixed mode, sharing)
+</code></pre><p>编个程序试试</p>
+<pre><code>vim test.java
 
-              </div>
-            </div>
+public class test {
+        public static void main(String args[]) {
+                System.out.println(&quot;Hello world!&quot;);
+        }
+}
+</code></pre><p>编译执行</p>
+<pre><code>root@356ca11f70aa:~# javac test.java
+root@356ca11f70aa:~# java test
+Hello world!
+</code></pre><h2 id="tomcat"><a href="#tomcat" class="headerlink" title="tomcat"></a>tomcat</h2><p>Tomcat服务器是一个免费的开放源代码的Web应用服务器，属于轻量级应用服务器，在中小型系统和并发访问用户不是很多的场合下被普遍使用，是开发和调试JSP程序的首选。<br><a href="https://tomcat.apache.org/" target="_blank" rel="noopener">tomcat官网</a><br>我下载好传到docker里</p>
+<pre><code>cp apache-tomcat-8.5.53.tar.gz /usr/local/
+</code></pre><p>解压</p>
+<pre><code>tar -zxvf apache-tomcat-8.5.53.tar.gz
+</code></pre><p>赋权限</p>
+<pre><code>chmod 755 -R apache-tomcat-8.5.53
+</code></pre><p>修改启动脚本，进入tomcat的bin目录下</p>
+<pre><code>vi startup.sh
+</code></pre><p>在最后一句前加上如下</p>
+<pre><code>#set java environment
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:%{JAVA_HOME}/lib:%{JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+
+#tomcat
+export TOMCAT_HOME=/usr/local/apache-tomcat-8.5.53
+</code></pre><p>运行</p>
+<pre><code>./startup.sh
+</code></pre>
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/linux">linux</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/linux">linux</a>
+                
+                  <a class="hover-with-bg" href="/tags/web">web</a>
+                
+                  <a class="hover-with-bg" href="/tags/tomcat">tomcat</a>
+                
+                  <a class="hover-with-bg" href="/tags/java">java</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -252,6 +377,11 @@
 
 
 
+  
+    <script src="/newblog/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/newblog/js/post.js" ></script>
+
 
 
   <script src="/newblog/lib/smoothscroll/SmoothScroll.min.js" ></script>
@@ -292,7 +422,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "标签 - web&nbsp;",
+        "ubuntu+java+tomcat&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
