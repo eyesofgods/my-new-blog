@@ -165,20 +165,16 @@
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">今天要写一个启动页，并且跳转到主程序。
+          <div class="index-text mb-1">今天要完成一个启动页，然后跳转到主程序。
 @Override@Override表示重写。编译器可以验证@Override下面的方法名是否是你父类中所有的，如果没有则报错。
-activity跳转一个app启动时，首先是启动页，然后跳转到主程序。
-Intent intent = new Intent(FirstActivity.this,SecondActivity.class);
-startActivity(intent);
-传送参数putExtra发送
-intent.putExtra(&quot;name&quot;,&quot;chenxiyuan&quot;);
-intent.putExtra(&quot;age&quot;,20);
-接收
-String name = intent.getStringExtra(&quot;name&quot;);
-int age = intent.getIntExtra(&quot;age&quot;);
-Bundle发送
-Bundle bundle = new Bundle();
-bundle.putString(&quot;name&quot;</div>
+启动页闪屏  &lt;activity
+            android:name=&quot;.StartPageActivity&quot;
+            android:theme=&quot;@style/SplashActivityTheme&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+            &lt;/intent-filter&gt;
+       &lt;/activity&g</div>
         </div>
       </a>
 

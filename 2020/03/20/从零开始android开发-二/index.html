@@ -135,7 +135,7 @@
                   
                   &nbsp;<i class="far fa-chart-bar"></i>
                   <span class="post-count">
-                    281 字
+                    466 字
                   </span>&nbsp;
                 
 
@@ -143,7 +143,7 @@
                   
                   &nbsp;<i class="far fa-clock"></i>
                   <span class="post-count">
-                      1 分钟
+                      2 分钟
                   </span>&nbsp;
                 
 
@@ -176,18 +176,39 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <p>今天要写一个启动页，并且跳转到主程序。</p>
+            <p>今天要完成一个启动页，然后跳转到主程序。</p>
 <h2 id="Override"><a href="#Override" class="headerlink" title="@Override"></a>@Override</h2><p><code>@Override</code>表示重写。编译器可以验证<code>@Override</code>下面的方法名是否是你父类中所有的，如果没有则报错。</p>
-<h2 id="activity跳转"><a href="#activity跳转" class="headerlink" title="activity跳转"></a>activity跳转</h2><p>一个app启动时，首先是启动页，然后跳转到主程序。</p>
+<h2 id="启动页"><a href="#启动页" class="headerlink" title="启动页"></a>启动页</h2><h3 id="闪屏"><a href="#闪屏" class="headerlink" title="闪屏"></a>闪屏</h3><pre><code class="xml">  &lt;activity
+            android:name=&quot;.StartPageActivity&quot;
+            android:theme=&quot;@style/SplashActivityTheme&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+            &lt;/intent-filter&gt;
+       &lt;/activity&gt;
+</code></pre>
+<h3 id="表示主activity"><a href="#表示主activity" class="headerlink" title="表示主activity"></a>表示主activity</h3><pre><code>&lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+&lt;/intent-filter&gt;
+</code></pre><p>小记录，如果你的程序闪退，有可能是你调用了那个xml，但是没在application里声明activity。。。</p>
+<h3 id="编辑样式"><a href="#编辑样式" class="headerlink" title="编辑样式"></a>编辑样式</h3><p>在style.xml中编辑主题样式SplashActivityTheme:</p>
+<pre><code>&lt;!-- Base application theme. --&gt;
+    &lt;style name=&quot;SplashActivityTheme&quot; parent=&quot;android:Theme.Holo.Light.NoActionBar&quot;&gt;
+        &lt;!-- Customize your theme here. --&gt;
+        &lt;item name=&quot;android:windowBackground&quot;&gt;@drawable/splash&lt;/item&gt;
+    &lt;/style&gt; 
+</code></pre><p>背景图片是drawable下的splash图片</p>
+<h3 id="activity跳转"><a href="#activity跳转" class="headerlink" title="activity跳转"></a>activity跳转</h3><p>一个app启动时，首先是启动页，然后跳转到主程序。<br>跳转语句如下</p>
 <pre><code>Intent intent = new Intent(FirstActivity.this,SecondActivity.class);
 startActivity(intent);
-</code></pre><h3 id="传送参数"><a href="#传送参数" class="headerlink" title="传送参数"></a>传送参数</h3><h4 id="putExtra"><a href="#putExtra" class="headerlink" title="putExtra"></a>putExtra</h4><p>发送</p>
+</code></pre><h4 id="传送参数"><a href="#传送参数" class="headerlink" title="传送参数"></a>传送参数</h4><h5 id="putExtra"><a href="#putExtra" class="headerlink" title="putExtra"></a>putExtra</h5><p>发送</p>
 <pre><code>intent.putExtra(&quot;name&quot;,&quot;chenxiyuan&quot;);
 intent.putExtra(&quot;age&quot;,20);
 </code></pre><p>接收</p>
 <pre><code>String name = intent.getStringExtra(&quot;name&quot;);
 int age = intent.getIntExtra(&quot;age&quot;);
-</code></pre><h4 id="Bundle"><a href="#Bundle" class="headerlink" title="Bundle"></a>Bundle</h4><p>发送</p>
+</code></pre><h5 id="Bundle"><a href="#Bundle" class="headerlink" title="Bundle"></a>Bundle</h5><p>发送</p>
 <pre><code>Bundle bundle = new Bundle();
 bundle.putString(&quot;name&quot;,&quot;chenxiyuan&quot;);
 bundle.putInt(&quot;age&quot;,20);
@@ -196,15 +217,15 @@ intent.putExtras(bundle);
 <pre><code>Bundle bundle = intent.getExtras();
 String name = bundle.getString(&quot;name&quot;);
 int age = bundle.getInt(&quot;age&quot;);
-</code></pre><h2 id="主activity"><a href="#主activity" class="headerlink" title="主activity"></a>主activity</h2><p>在相应的标签里加入如下</p>
-<pre><code>    &lt;intent-filter&gt;
-                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
-
-                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
-    &lt;/intent-filter&gt;
-</code></pre><p>小记录，如果你的程序闪退，有可能是你调用了那个xml，但是没在application里声明activity。。。</p>
-<h2 id="webview不跳转到浏览器"><a href="#webview不跳转到浏览器" class="headerlink" title="webview不跳转到浏览器"></a>webview不跳转到浏览器</h2><p>在loadurl方法前加入如下,即可实现不跳转到默认浏览器，而是在页面内访问。</p>
+</code></pre><h2 id="webview不跳转到浏览器"><a href="#webview不跳转到浏览器" class="headerlink" title="webview不跳转到浏览器"></a>webview不跳转到浏览器</h2><p>在loadurl方法前加入如下,即可实现不跳转到默认浏览器，而是在页面内访问。</p>
 <pre><code>myWebView.setWebViewClient(new WebViewClient());
+</code></pre><h2 id="状态栏透明"><a href="#状态栏透明" class="headerlink" title="状态栏透明"></a>状态栏透明</h2><p>启动页如果状态栏不透明，效果会很差。可以定义如下方法，然后在onCreate后调用此方法就行了。</p>
+<pre><code>public static void setTranslucent(Activity activity) {
+        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.KITKAT) {
+            // 设置状态栏透明
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+    }
 </code></pre>
             <hr>
           </div>
