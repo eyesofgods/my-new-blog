@@ -15,7 +15,7 @@
   <meta name="description" content>
   <meta name="author" content="chenxiyuan">
   <meta name="keywords" content>
-  <title>归档 ~ 晨曦远的博客</title>
+  <title>晨曦远的博客</title>
 
   <link rel="stylesheet" href="/newblog/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/newblog/lib/bootstrap/css/bootstrap.min.css">
@@ -36,7 +36,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 100vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -112,7 +112,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('/newblog/img/guidang.jpg')no-repeat center center;
+         style="background: url('http://120.26.91.51:4001/uploads/big/0116142757c4eff2a01a2c5518277ebb.jpg')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -124,6 +124,10 @@
             
           </div>
 
+          
+            <div class="scroll-down-bar">
+              <i class="fas fa-angle-down scroll-down-arrow"></i>
+            </div>
           
         </div>
       </div>
@@ -140,74 +144,82 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="list-group">
-  <p class="h4">共计 11 篇文章</p>
-  <hr>
-  
+
+  <div class="row mx-auto index-card">
     
-      
-      <p class="h5">2020</p>
     
-    <a href="/newblog/2020/03/23/混合密码算法的模拟实现/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">混合密码算法的模拟实现</span>
-      <span style="float: right;">03-23</span>
-    </a>
-  
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/newblog/2020/03/03/python3-aes实现/" target="_self">
+          <img src="/newblog/img/python.jpg" srcset="/newblog/img/loading.gif" alt="python3 aes实现" class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
     
-    <a href="/newblog/2020/03/20/从零开始android开发-二/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">从零开始android开发(二)</span>
-      <span style="float: right;">03-20</span>
-    </a>
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/newblog/2020/03/03/python3-aes实现/">
+        <p class="h4 index-header">python3 aes实现</p>
+      </a>
+
+      <a href="/newblog/2020/03/03/python3-aes实现/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">环境python-3.6.5
+pip install pycryptodome
+#Python36\Lib\site-packages\crypto =&gt;Python36\Lib\site-packages\Crypto  不更改导入包会报错
+AESECBfrom Crypto.Cipher import AES
+import base64
+
+def add_to_16(par):
+    par = par.encode(&#39;gbk&#39;) #先将字符串类型数据转换成字节型数据
+    while len(par) % 16 != 0: #对字节型数据进行长度判断
+        par += b&#39;\x00&#39; #如果字节型数据长度不是16倍整数就进行 补充
+    return par
+def encrypt(text,key):
+    mode = AES.MODE_ECB
+    aes = AES.new(add_to_16(key), mode)
+    cipher = aes.encrypt(add_to_16(text))
+    re</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-03&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/crypto">crypto</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/python">python</a>&nbsp;
+          
+            <a href="/tags/aes">aes</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="index posts navigation">
+    <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
+      <a class="extend prev" rel="prev" href="/newblog/"><i class="fas fa-angle-double-left"></i></a><a class="page-number" href="/newblog/">1</a><span class="page-number current">2</span>
+    </span>
+  </nav>
   
-    
-    <a href="/newblog/2020/03/19/ubuntu-java-tomcat-mysql/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">ubuntu+java+tomcat</span>
-      <span style="float: right;">03-19</span>
-    </a>
-  
-    
-    <a href="/newblog/2020/03/19/给服务器和docker传文件/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">给服务器和docker传文件</span>
-      <span style="float: right;">03-19</span>
-    </a>
-  
-    
-    <a href="/newblog/2020/03/17/从零开始android开发-一/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">从零开始android开发(一)</span>
-      <span style="float: right;">03-17</span>
-    </a>
-  
-    
-    <a href="/newblog/2020/03/16/Ollydbg破解crackme001/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Ollydbg破解crackme001</span>
-      <span style="float: right;">03-16</span>
-    </a>
-  
-    
-    <a href="/newblog/2020/03/16/SUCTF2019-EasySQL记录/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">SUCTF2019 EasySQL记录</span>
-      <span style="float: right;">03-16</span>
-    </a>
-  
-    
-    <a href="/newblog/2020/03/16/docker-Lychee搭建自己的图床/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">docker+Lychee搭建自己的图床</span>
-      <span style="float: right;">03-16</span>
-    </a>
-  
-    
-    <a href="/newblog/2020/03/15/记一次ctf校赛simple-xss出题/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">记一次ctf校赛simple_xss出题</span>
-      <span style="float: right;">03-15</span>
-    </a>
-  
-    
-    <a href="/newblog/2020/03/03/python3-aes实现/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">python3 aes实现</span>
-      <span style="float: right;">03-03</span>
-    </a>
-  
-</div>
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByClassName("page-number")) {
+      ele.href += '#board';
+    }
+  </script>
+
 
 
               </div>
@@ -333,7 +345,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "诗 酒 趁 年 华&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

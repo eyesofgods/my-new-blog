@@ -149,6 +149,58 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/newblog/2020/04/06/python实现转轮密码机/" target="_self">
+          <img src="/newblog/img/python.jpg" srcset="/newblog/img/loading.gif" alt="python实现转轮密码机" class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/newblog/2020/04/06/python实现转轮密码机/">
+        <p class="h4 index-header">python实现转轮密码机</p>
+      </a>
+
+      <a href="/newblog/2020/04/06/python实现转轮密码机/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">密码学第一个实验。三转轮密码机，慢轮中轮快轮，每加密一个字符，快轮转动一圈，快轮每转动26圈中轮转动一圈，中轮每转动26圈慢轮转动一圈。因此三转轮密码机的密钥空间为26*26*26=17576代码:
+from tkinter import *
+import tkinter as tk
+import tkinter.messagebox
+
+window =tk.Tk() #实例化object
+window.title(&#39;转轮密码机&#39;) #窗口标题
+window.geometry(&#39;1000x400&#39;) #窗口尺寸
+a=[&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;,&#39;E&#39;,&#39;F&#39;,&#39;G&#39;,&#39;H&#39;,&#39;I&#39;,&#39;J&#39;,&#39;K&#39;,&#39;L&#39;,&#39;M&#39;,&#39;N&#39;,&#39;O&#39;,&#39;P&#39;,&#39;Q&#39;,&#39;R&#39;,&#39;S</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-06&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/crypto">crypto</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/python">python</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/newblog/2020/03/23/混合密码算法的模拟实现/" target="_self">
           <img src="/newblog/img/python.jpg" srcset="/newblog/img/loading.gif" alt="混合密码算法的模拟实现" class="index-img img-fluid rounded index-thumbnails">
         </a>
@@ -392,9 +444,9 @@ q, --quiet:安静执行，不输出提示信息
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/docker">docker</a>&nbsp;
-          
             <a href="/tags/linux">linux</a>&nbsp;
+          
+            <a href="/tags/docker">docker</a>&nbsp;
           
         
       </div>
@@ -723,68 +775,19 @@ XSS类型反射型XSS反射型XSS也叫非持久型XSS，是指发生请求时�
     </div>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/newblog/2020/03/03/python3-aes实现/" target="_self">
-          <img src="/newblog/img/python.jpg" srcset="/newblog/img/loading.gif" alt="python3 aes实现" class="index-img img-fluid rounded index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/newblog/2020/03/03/python3-aes实现/">
-        <p class="h4 index-header">python3 aes实现</p>
-      </a>
-
-      <a href="/newblog/2020/03/03/python3-aes实现/">
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">环境python-3.6.5
-pip install pycryptodome
-#Python36\Lib\site-packages\crypto =&gt;Python36\Lib\site-packages\Crypto  不更改导入包会报错
-AESECBfrom Crypto.Cipher import AES
-import base64
-
-def add_to_16(par):
-    par = par.encode(&#39;gbk&#39;) #先将字符串类型数据转换成字节型数据
-    while len(par) % 16 != 0: #对字节型数据进行长度判断
-        par += b&#39;\x00&#39; #如果字节型数据长度不是16倍整数就进行 补充
-    return par
-def encrypt(text,key):
-    mode = AES.MODE_ECB
-    aes = AES.new(add_to_16(key), mode)
-    cipher = aes.encrypt(add_to_16(text))
-    re</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-03&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/crypto">crypto</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/python">python</a>&nbsp;
-          
-            <a href="/tags/aes">aes</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
 
 
+  <nav aria-label="index posts navigation">
+    <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/newblog/page/2/">2</a><a class="extend next" rel="next" href="/newblog/page/2/"><i class="fas fa-angle-double-right"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByClassName("page-number")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 

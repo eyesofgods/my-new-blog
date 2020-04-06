@@ -15,7 +15,7 @@
   <meta name="description" content>
   <meta name="author" content="chenxiyuan">
   <meta name="keywords" content>
-  <title>给服务器和docker传文件 ~ 晨曦远的博客</title>
+  <title>python实现转轮密码机 ~ 晨曦远的博客</title>
 
   <link rel="stylesheet" href="/newblog/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/newblog/lib/bootstrap/css/bootstrap.min.css">
@@ -126,7 +126,7 @@
               
                 <p class="mt-3">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
-                  星期四, 三月 19日 2020, 11:27 上午
+                  星期一, 四月 6日 2020, 2:17 下午
                 </p>
               
 
@@ -135,7 +135,7 @@
                   
                   &nbsp;<i class="far fa-chart-bar"></i>
                   <span class="post-count">
-                    304 字
+                    1.1k 字
                   </span>&nbsp;
                 
 
@@ -143,7 +143,7 @@
                   
                   &nbsp;<i class="far fa-clock"></i>
                   <span class="post-count">
-                      1 分钟
+                      6 分钟
                   </span>&nbsp;
                 
 
@@ -176,47 +176,109 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <h2 id="本机到服务器"><a href="#本机到服务器" class="headerlink" title="本机到服务器"></a>本机到服务器</h2><p>用xshell连服务器，可以用<code>scp</code>传。<br>今天发现了一个好用的命令<code>rz</code>,可以直接上传文件到当前文件夹。</p>
-<pre><code>rz [选项]
+            <p>密码学第一个实验。<br>三转轮密码机，慢轮中轮快轮，每加密一个字符，快轮转动一圈，快轮每转动26圈中轮转动一圈，中轮每转动26圈慢轮转动一圈。<br>因此三转轮密码机的密钥空间为<code>26*26*26=17576</code><br><img src="http://120.26.91.51:4001/uploads/big/6fc515e9f24d80321f00c0ee130ccf7f.png" srcset="/newblog/img/loading.gif" alt="转轮机恢复初始状态"><br>代码:</p>
+<pre><code class="python">from tkinter import *
+import tkinter as tk
+import tkinter.messagebox
 
-选项说明：
+window =tk.Tk() #实例化object
+window.title(&#39;转轮密码机&#39;) #窗口标题
+window.geometry(&#39;1000x400&#39;) #窗口尺寸
+a=[&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;,&#39;E&#39;,&#39;F&#39;,&#39;G&#39;,&#39;H&#39;,&#39;I&#39;,&#39;J&#39;,&#39;K&#39;,&#39;L&#39;,&#39;M&#39;,&#39;N&#39;,&#39;O&#39;,&#39;P&#39;,&#39;Q&#39;,&#39;R&#39;,&#39;S&#39;,&#39;T&#39;,&#39;U&#39;,&#39;V&#39;,&#39;W&#39;,&#39;X&#39;,&#39;Y&#39;,&#39;Z&#39;]
 
--+, --append:将文件内容追加到已存在的同名文件
+def TurnWheel(wheel_l,wheel_r):
+    temp_l=wheel_l[-1]
+    wheel_l.pop()#移除尾元素
+    wheel_l.insert(0,temp_l)
+    temp_r=wheel_r[-1]
+    wheel_r.pop()#移除尾元素
+    wheel_r.insert(0,temp_r)
 
--a,--ascii:以文本方式传输
+def ReverseWheel(wheel_l,wheel_r):
+    temp_l=wheel_l[0]
+    wheel_l.pop(0)#移除首元素
+    wheel_l.append(temp_l)
+    temp_r=wheel_r[0]
+    wheel_r.pop(0)#移除首元素
+    wheel_r.append(temp_r)
 
--b, --binary:以二进制方式传输，推荐使用
+def encrypt():
+    if text1.get(1.0, END) == &#39;\n&#39;:#获取原文文本框内容
+        tkinter.messagebox.showinfo(&#39;提示&#39;, &#39;请输入原文&#39;)
+    else:
+        slow_l=[24,25,26,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+        slow_r=[21,3,15,1,19,10,14,26,20,8,16,7,22,4,11,5,17,9,12,23,18,2,25,6,24,13]
+        middle_l=[26,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
+        middle_r=[20,1,6,4,15,3,14,12,23,5,16,2,22,19,11,18,25,24,13,7,10,8,21,9,26,17]
+        fast_l=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
+        fast_r=[8,18,26,17,20,22,10,3,13,11,4,23,5,24,9,12,25,16,19,6,15,21,2,7,1,14]
+        Plaintext=text1.get(1.0,END).strip()#删除最后一位\n元素
+        cipher=&#39;&#39;
+        count=0
+        for element in Plaintext :
+            cipher+=a[fast_r.index(fast_l[middle_r.index(middle_l[slow_r.index(slow_l[a.index(element)])])])]
+            count+=1
+            TurnWheel(fast_l,fast_r)
+            if(count%26==0):
+                TurnWheel(middle_l,middle_r)
+                if(count%(26*26)==0):
+                    TurnWheel(slow_l,slow_r)
+    text2.delete(1.0, END)
+    text2.insert(1.0, cipher)
 
---delay-startup N:等待N秒
+def decrypt():
+    if text2.get(1.0,END) == &#39;\n&#39;: #获取密文文本框内容
+        tkinter.messagebox.showinfo(&#39;提示&#39;, &#39;请输入密文&#39;)
+    else:
+        Ciphertext=text2.get(1.0,END).strip()
+        plain=&#39;&#39;
+        slow_l=[24,25,26,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+        slow_r=[21,3,15,1,19,10,14,26,20,8,16,7,22,4,11,5,17,9,12,23,18,2,25,6,24,13]
+        middle_l=[26,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
+        middle_r=[20,1,6,4,15,3,14,12,23,5,16,2,22,19,11,18,25,24,13,7,10,8,21,9,26,17]
+        fast_l=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
+        fast_r=[8,18,26,17,20,22,10,3,13,11,4,23,5,24,9,12,25,16,19,6,15,21,2,7,1,14]
+        count=0
+        for element in Ciphertext:#先把转轮机转到加密后的状态                       
+            count+=1
+            TurnWheel(fast_l,fast_r)
+            if(count%26==0):
+                TurnWheel(middle_l,middle_r)
+                if(count%(26*26)==0):
+                    TurnWheel(slow_l,slow_r)            
+        for element in Ciphertext[::-1]:
+            ReverseWheel(fast_l,fast_r)           
+            plain+=a[slow_l.index(slow_r[middle_l.index(middle_r[fast_l.index(fast_r[a.index(element)])])])]
+            if(count%26==0):
+                TurnWheel(middle_l,middle_r)
+                if(count%(26*26)==0):
+                    TurnWheel(slow_l,slow_r) 
+            count-=1                           
+    text1.delete(1.0, END)
+    text1.insert(1.0, plain[::-1])
 
--e, --escape:对所有控制字符转义，建议使用
+if __name__==&#39;__main__&#39;:
+    labe1 = tk.Label(window, text=&#39;原文:&#39;, font=(&#39;宋体&#39;, 12), width=20, height=2)
+    labe2 = tk.Label(window, text=&#39;密文:&#39;, font=(&#39;宋体&#39;, 12), width=20, height=2)
+    labe3 = tk.Label(window, text=&#39;请输入大写字母，原文经过加密后输出在密文框，转轮机恢复初始状态.解密时先从初始状态转到加密后状态，再进行解密&#39;, bg=&#39;green&#39;, font=(&#39;宋体&#39;, 12), width=100, height=4)
+    text1 = tk.Text(window, show=None, font=(&#39;Arial&#39;, 10))
+    text2 = tk.Text(window, show=None, font=(&#39;Arial&#39;, 10))
+    button1 = tk.Button(window, text=&#39;加密&#39;, font=(&#39;宋体&#39;, 12,), width=5, height=1, command=encrypt)
+    button2 = tk.Button(window, text=&#39;解密&#39;, font=(&#39;宋体&#39;, 12,), width=5, height=1, command=decrypt)
 
--E, --rename:已存在同名文件则重命名新上传的文件，以点和数字作为后缀
+    text1.place(relx=0.2,rely=0.3,relwidth=0.6,relheight=0.2)
+    text2.place(relx=0.2,rely=0.7,relwidth=0.6,relheight=0.2)
+    labe1.place(relx=0,rely=0.35,relwidth=0.3)
+    labe2.place(relx=0,rely=0.75,relwidth=0.3)
+    labe3.place(relx=0,rely=0,relwidth=1)
 
--p, --protect:对ZMODEM协议有效，如果目标文件已存在则跳过 -
+    button1.place(relx=0.3,rely=0.9)
+    button2.place(relx=0.6,rely=0.9)
 
-q, --quiet:安静执行，不输出提示信息
+    window.mainloop() 
 
--v, --verbose:输出传输过程中的提示信息
-
--y, --overwrite:存在同名文件则替换
-
--X, --xmodem:使用XMODEM协议
-
---ymodem:使用YMODEM协议
-
--Z, --zmodem:使用ZMODEM协议
-
---version：显示版本信息
-
---h, --help：显示帮助信息
-
-</code></pre><p>下载到本地就用sz命令。</p>
-<h2 id="服务器到docker"><a href="#服务器到docker" class="headerlink" title="服务器到docker"></a>服务器到docker</h2><p>服务器到docker</p>
-<pre><code>docker cp 本机保存文件的全路径 container_id:docker容器内的文件全路径
-</code></pre><p>docker到服务器</p>
-<pre><code>docker cp container_id:docker容器内的文件全路径 本机保存文件的全路径
 </code></pre>
+
             <hr>
           </div>
           <br>
@@ -226,7 +288,7 @@ q, --quiet:安静执行，不输出提示信息
               <span>
                 <i class="iconfont icon-inbox"></i>
                 
-                  <a class="hover-with-bg" href="/categories/linux">linux</a>
+                  <a class="hover-with-bg" href="/categories/crypto">crypto</a>
                   &nbsp;
                 
               </span>&nbsp;&nbsp;
@@ -235,9 +297,7 @@ q, --quiet:安静执行，不输出提示信息
               <span>
                 <i class="iconfont icon-tag"></i>
                 
-                  <a class="hover-with-bg" href="/tags/linux">linux</a>
-                
-                  <a class="hover-with-bg" href="/tags/docker">docker</a>
+                  <a class="hover-with-bg" href="/tags/python">python</a>
                 
               </span>
             
@@ -393,7 +453,7 @@ q, --quiet:安静执行，不输出提示信息
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "给服务器和docker传文件&nbsp;",
+        "python实现转轮密码机&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
