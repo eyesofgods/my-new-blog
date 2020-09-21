@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>栈溢出实现</title>
+    <link href="/newblog/2020/09/19/%E6%A0%88%E6%BA%A2%E5%87%BA%E5%AE%9E%E7%8E%B0/"/>
+    <url>/newblog/2020/09/19/%E6%A0%88%E6%BA%A2%E5%87%BA%E5%AE%9E%E7%8E%B0/</url>
+    
+    <content type="html"><![CDATA[<p>先编写test.c</p><pre><code class="c">#include &lt;stdio.h&gt;#include &lt;string.h&gt;void function2(){    printf(&quot;Execution flow changed\n&quot;);}void function1(char *str){    char buffer[5];    strcpy(buffer,str);}void main(int argc,char *argv[]){    function1(argv[1]);    printf(&quot;Executed normally\n&quot;);}</code></pre><p>安装完整的gcc编译包</p><pre><code>sudo apt-get install gcc-multilib</code></pre><p>用32位编译test.c, -fno-stack-protector：关闭堆栈保护机制. -z execstack：打开堆栈可执行机制</p><pre><code>gcc -m32  -g -fno-stack-protector -z execstack -o bufferoverflow test.c</code></pre><p>运行测试:<br><img src="http://120.26.91.51:4001/uploads/big/7f612a234502733f6401547ba60bb36b.png" srcset="/newblog/img/loading.gif" alt="运行测试"><br>安装gdb</p><pre><code>sudo apt-get install gdb</code></pre><p>进入gdb调试 </p><pre><code>gdb bufferoverflow</code></pre><p>在第9行下断点，即当function1函数退出时，找到返回地址，用function2的起始地址覆盖掉返回地址<br><img src="http://120.26.91.51:4001/uploads/big/b2091ae40f9b7f3311bfbd36b9850b45.png" srcset="/newblog/img/loading.gif" alt="gdb调试"><br><img src="http://120.26.91.51:4001/uploads/big/4dd61cad72a08698fad850f1177c28ff.png" srcset="/newblog/img/loading.gif" alt="控制返回地址"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>re</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>逆向</tag>
+      
+      <tag>栈溢出</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>lua基本语法</title>
     <link href="/newblog/2020/07/28/lua%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/"/>
     <url>/newblog/2020/07/28/lua%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</url>
@@ -255,11 +282,11 @@
     
     <tags>
       
-      <tag>web</tag>
-      
       <tag>sql</tag>
       
       <tag>注入</tag>
+      
+      <tag>web</tag>
       
     </tags>
     
