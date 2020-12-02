@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>蒙特·卡罗方法</title>
+    <link href="/newblog/2020/12/02/%C2%96%E8%92%99%E7%89%B9%C2%B7%E5%8D%A1%E7%BD%97%E6%96%B9%E6%B3%95/"/>
+    <url>/newblog/2020/12/02/%C2%96%E8%92%99%E7%89%B9%C2%B7%E5%8D%A1%E7%BD%97%E6%96%B9%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<h2 id="蒙特卡洛方法"><a href="#蒙特卡洛方法" class="headerlink" title="蒙特卡洛方法"></a>蒙特卡洛方法</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>蒙特·卡罗方法（Monte Carlo method），也称统计模拟方法，是二十世纪四十年代中期由于科学技术的发展和电子计算机的发明，而被提出的一种以概率统计理论为指导的一类非常重要的数值计算方法。是指使用随机数（或更常见的伪随机数）来解决很多计算问题的方法。与它对应的是确定性算法。蒙特·卡罗方法在金融工程学，宏观经济学，计算物理学（如粒子输运计算、量子热力学计算、空气动力学计算）等领域应用广泛。<br>蒙特卡罗方法于20世纪40年代美国在第二次世界大战中研制原子弹的“曼哈顿计划”计划的成员S.M.乌拉姆和J.冯·诺伊曼首先提出。数学家冯·诺伊曼用驰名世界的赌城—摩纳哥的Monte Carlo—来命名这种方法，为它蒙上了一层神秘色彩。在这之前，蒙特卡罗方法就已经存在。1777年，法国数学家布丰（Georges Louis Leclere de Buffon，1707—1788）提出用投针实验的方法求圆周率π。这被认为是蒙特卡罗方法的起源。</p><h3 id="π的计算"><a href="#π的计算" class="headerlink" title="π的计算"></a>π的计算</h3><p>圆与外切正方形的面积比为π/4,在正方形内随机均匀置n个点，落在圆内点的数量与总数n之比为近似为面积比即π/4,通过python置随机数来模拟置点，通过计算点到圆心的距离判断是否在圆内统计其数量，计算后即可得到π的近似值</p><pre><code class="python">import randomdef calpi(n):    count=0    for i in range(0,n):        x=random.random()        y=random.random()        if (x-0.5)**2+(y-0.5)**2&lt;=0.25:            count+=1    print(count/float(n)*4)calpi(10000000)</code></pre><h3 id="积分计算"><a href="#积分计算" class="headerlink" title="积分计算"></a>积分计算</h3><p>可以利用这个思想计算函数 y = x2 在 [0, 1] 区间的积分，也就是求出下图红色部分的面积。<br><img src="http://120.26.91.51:4001/uploads/big/421d9ed62ded32da00ce5d46b5e7e1a7.jpg" srcset="/newblog/img/loading.gif" alt="积分"><br>这个函数在 (1,1) 点的取值为1，所以整个红色区域在一个面积为1的正方形里面。在该正方形内部，产生大量随机点，可以计算出有多少点落在红色区域（判断条件 y &lt; x2）。这个比重就是所要求的积分值。</p><pre><code class="python">import randomdef cal(n):    count=0    for i in range(0,n):        x=random.random()        y=random.random()        if y&lt;=x**2:            count+=1    print(count/float(n))cal(1000000)</code></pre><h3 id="围棋ai"><a href="#围棋ai" class="headerlink" title="围棋ai"></a>围棋ai</h3><p>围棋的难度在于可能性太多，所以解决这个问题的方式还是，减少可能集并且从中找到最优解。<br>核心思想还是深度学习，利用规则网络（policy networks）来减少下一步的可能选择，利用价值网络（value networks）来评估目前的局势；同时通过收集大量人类专家比赛的数据来训练深度神经网络，然后不断地自己跟自己玩，强化这个网络。<br>与传统的向前查找（lookahead search）不同，他们利用蒙特卡洛查找树（Monte-Carlo tree search）的方法模拟了大量的可能结果，然后从中选取最优的更新网络。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>ai</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>栈溢出实现</title>
     <link href="/newblog/2020/09/19/%E6%A0%88%E6%BA%A2%E5%87%BA%E5%AE%9E%E7%8E%B0/"/>
     <url>/newblog/2020/09/19/%E6%A0%88%E6%BA%A2%E5%87%BA%E5%AE%9E%E7%8E%B0/</url>
@@ -20,9 +45,9 @@
     
     <tags>
       
-      <tag>逆向</tag>
-      
       <tag>栈溢出</tag>
+      
+      <tag>逆向</tag>
       
     </tags>
     
@@ -203,9 +228,9 @@
     
     <tags>
       
-      <tag>docker</tag>
-      
       <tag>linux</tag>
+      
+      <tag>docker</tag>
       
     </tags>
     
@@ -255,9 +280,9 @@
     
     <tags>
       
-      <tag>Ollydbg</tag>
-      
       <tag>逆向</tag>
+      
+      <tag>Ollydbg</tag>
       
     </tags>
     

@@ -149,6 +149,53 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/newblog/2020/03/16/Ollydbg破解crackme001/" target="_self">
+          <img src="/newblog/img/default.png" srcset="/newblog/img/loading.gif" alt="Ollydbg破解crackme001" class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/newblog/2020/03/16/Ollydbg破解crackme001/">
+        <p class="h4 index-header">Ollydbg破解crackme001</p>
+      </a>
+
+      <a href="/newblog/2020/03/16/Ollydbg破解crackme001/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">逆向我也只是个初学者，之前博客有记录IDA的一些使用，这次来爆破一个简单的crackme。首先Ollydbg打开,看看基本逻辑。可以看到输入出错后消息框里有Try again!!字符串，就从这里入手了。右键中文搜索引擎-&gt;智能搜索，搜索Try分别点开这两块，来看看汇编的代码。这里看到上面有一句jnz，查一下发现JNZ : jump if not zero 结果不为零则转移，那么这里填充NOP不让它跳转到Try again，就成功执行下去，爆破成功，下面一个同理。爆破成功。接下来保存右键-&gt;复制到可执行文件-&gt;所有修改-&gt;全部复制，然后跳转到.exe窗口，在这个窗口里右键-&gt;保存文件即可。
+</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-16&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/re">re</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E9%80%86%E5%90%91">逆向</a>&nbsp;
+          
+            <a href="/tags/Ollydbg">Ollydbg</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/newblog/2020/03/16/SUCTF2019-EasySQL记录/" target="_self">
           <img src="/newblog/img/default.png" srcset="/newblog/img/loading.gif" alt="SUCTF2019 EasySQL记录" class="index-img img-fluid rounded index-thumbnails">
         </a>
